@@ -1,0 +1,59 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="stylesheet" href="./css/testimonial.css">
+    <title>Personal web</title>
+</head>
+<body>
+    <!-- nav bar -->
+    <nav>
+        <div class="nav-left">
+            <ul>
+                <li>
+                    <img src="./image/logo.png">
+                </li>
+                <li class="nav1 item-collapse">
+                    <a href="index.html">Home</a>
+                </li>
+                <li class="item-collapse">
+                    <a href="myProject.html">My Project</a>
+                </li>
+                <li class="item-collapse">
+                    <a class="active"  href="testimonial.html">Testimonials</a>
+                </li>
+            </ul>
+        </div>
+        <div class="nav-right item-collapse">
+            <a href="contact.html">Contact me</a>
+        </div>
+        <div class="nav-right" id="barsmenu">
+            <button style="background-color: transparent; border: none; cursor: pointer;" onclick="openHamburger()">
+                <i class="fa-2x fa-solid fa-bars"></i>
+            </button>
+        </div>
+    </nav>
+
+    <div class="hamburger-nav-container" id="hamburger-nav-container">
+        <a href="index.html">Home</a>
+        <a href="blog.html" class="hamburger-active">My Project</a>
+        <a href="contact.html">Contact me</a>
+    </div>
+
+    <!-- testimonial card -->
+    <div class="container">
+        <h1>My Testimonials</h1>
+        <section class="testimonials" id="testimonials">
+           <!-- <div class="testimonial">
+                <img
+                class="profile-testimonial"
+                 src="https://i.pinimg.com/564x/48/1c/f5/481cf50a8cd5d97eb646aa9f1f3ed07e.jpg" alt="profile">
+                <p class="quote">Mantap, keren!</p>
+                <p class="autor">-Lidia Maulida</p>
+            </div> -->
+        </section>
+    </div>
+    <script src="./js/testimonial.js"></script>
+</body>
+</html>
