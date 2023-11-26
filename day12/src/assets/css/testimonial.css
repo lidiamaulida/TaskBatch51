@@ -1,0 +1,183 @@
+@import url('https://fonts.googleapis.com/css2?family=Poppins&display=swap');
+
+ * {
+    text-decoration: none;
+    color: black;
+    font-family: 'poppins';
+ }
+
+ body {
+    margin: 0;
+    padding: 0;
+ }
+
+ nav { /* flex container */
+    background-color: #ebeaea;
+    display: flex;
+    align-items: center;
+    height: 10vh;
+    width: 100vw;
+ }
+
+ nav ul {
+    display: flex;
+    list-style-type: none;
+    align-items: center;
+ }
+
+ nav ul li {
+    margin-right: 50PX;
+    font-size: 20px;
+ }
+
+ nav ul li .active {
+    color: black;
+    font-weight: bold;
+    font-family: arial;
+ }
+
+ nav ul li img {
+    margin-left: 50px;
+ }
+
+ .nav-left {/*flex item*/
+    flex: 50%;
+ }
+
+ .nav-right {
+    flex: 50%;
+    text-align: end;
+    margin-right: 25px;
+ }
+
+ .nav-right a {
+    background-color: black;
+    color: white;
+    padding: 8px 25px;
+    border-radius: 10px;
+ }
+
+ .nav1 a {
+    font-weight: bold;
+ }
+
+ /* testimonial card */
+
+ .container {
+   padding: 50px 0px;
+   display: flex;
+   flex-direction: column;
+   align-items: center;
+ }
+
+ .testimonials {
+   display: flex;
+   justify-content: center;
+   width: 100%;
+   flex-wrap: wrap;
+   margin-top: 30px;
+ }
+
+ .testimonial {
+   width: 25%;
+   padding: 20px;
+   margin: 0 15px 30px 15px;
+   background-color: white;
+   box-shadow: 0px 0px 20px #cecece;
+ }
+
+ .rating-container h2 {
+   text-align: center;
+ }
+
+ .testimonial img {
+   height: 200px;
+   object-fit: cover;
+ }
+
+ .quote {
+   font-style: italic;
+   font-size: 15px;
+   line-height: 1,5;
+   margin-bottom: 15px;
+ }
+
+ .autor {
+   font-weight: bold;
+   text-align: right;
+ }
+
+ .profile-testimonial {
+   width: 100%;
+ }
+
+ .container-rating {
+   display: flex;
+   flex-direction: column;
+   align-items: center;
+ }
+
+ .rating-btn {
+   font-weight: bold;
+   font-weight: 20px;
+   margin: 20px;
+   padding: 0 20px;
+   background-color: rgb(66, 67, 67);
+   color: white;
+   cursor: pointer;
+ }
+
+ .rating-btn i {
+   color: white;
+ }
+
+ #barsmenu {
+    display: none;
+ }
+ 
+ .hamburger-nav-container {
+    font-size: 10px;
+    list-style-type: none;
+    background-color: lightgray;
+    padding: 10px;
+    display: none;
+ }
+ 
+ .hamburger-nav-container a {
+    justify-content: center;
+    align-items: center;
+    display: flex;
+    padding: 10px;
+ }
+ 
+ .hamburger-nav-container .hamburger-active {
+    background-color: black;
+    color: white;
+    margin-left: 90px;
+    margin-right: 90px;
+    border-radius: 10px;
+ }
+
+ @media only screen and (max-width: 800px) {
+   .testimonial {
+     width: 40%;
+   }
+
+   .item-collapse {
+      display: none;
+   }
+
+   #barsmenu {
+      display: block;
+   }
+
+   nav {
+      width: 100%;
+   }
+} 
+
+@media only screen and (max-width: 700px) {
+  .testimonial {
+     width: 100%;
+  }
+}
