@@ -51,6 +51,7 @@ app.get('/register', registerView)
 app.post('/register', register)
 app.get('/login', loginView)
 app.post('/login', login)
+app.get('/logout', logout)
 
 //local server
 app.listen(PORT, () => {
@@ -276,3 +277,13 @@ async function login(req, res) {
       })
 
 }
+
+async function logout (req, res) {
+    console.log('logout page ===> ')
+    req.session.destroy((err) => {
+      if (err) {
+        console.error('Error destroying session:', err);
+      }
+      res.redirect('/login');
+    });
+  }
