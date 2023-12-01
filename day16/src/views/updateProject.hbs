@@ -71,6 +71,7 @@
             <form class="row g-3"
               method="post"
               action="/update-project"
+              enctype="multipart/form-data"
             >
                <input type="hidden" name="id" value="{{data.id}}" />
                 <div class="mb-3">
@@ -122,7 +123,7 @@
                 </div>
                 <div class="mb-3">
                     <label for="input-image" class="form-label fw-medium">Upload image</label>
-                    <input type="file" class="form-control" name="upload-image" id="input-image">
+                    <input type="file" class="form-control" name="image" id="input-image">
                 </div>
                 <div class="d-flex justify-content-end">
                     <button type="submit" class="btn btn-dark rounded-5 ps-3 pe-3 ala">Submit</button>

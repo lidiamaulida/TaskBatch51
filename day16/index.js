@@ -18,7 +18,7 @@ app.set("views", path.join(__dirname, 'src/views'))
 
 //set static
 app.use("/assets", express.static(path.join(__dirname, 'src/assets')))
-// app.use("/uploads", express.static(path.join(__dirname, 'src/uploads')))
+app.use("/uploads", express.static(path.join(__dirname, 'src/uploads')))
 
 //parsing data from cliant
 app.use(express.urlencoded({ extended: false }))
@@ -46,7 +46,7 @@ app.post('/add-project', upload.single("image"),addProject)
 app.get('/detail-project/:id', detailProject) 
 app.post('/delete/:id', deleteBlog)
 app.get('/update-project/:id', updateProjectview)
-app.post('/update-project', updateProject)
+app.post('/update-project', upload.single("image"), updateProject)
 app.get('/register', registerView)
 app.post('/register', register)
 app.get('/login', loginView)
@@ -60,9 +60,16 @@ app.listen(PORT, () => {
 
 
 async function home(req, res) {
-    const query = `SELECT projects.id, title, description, "distanceTime", technologies, image, users.name AS author FROM projects LEFT JOIN users ON projects.author = users.id`
-    const obj = await sequelize.query(query, { type: QueryTypes.SELECT })
+    let obj;
+    if (!req.session.isLogin) {
+        const query = `SELECT projects.id, title, description, "distanceTime", technologies, image, users.name AS author FROM projects LEFT JOIN users ON projects.author = users.id`
+        obj = await sequelize.query(query, { type: QueryTypes.SELECT })
+    } else {
+      const id = req.session.idUser;
+      const query = `SELECT projects.id, title, description, "distanceTime", technologies, image, users.name AS author FROM projects LEFT JOIN users ON projects.author = users.id WHERE projects.author=${id}  ORDER BY projects.id DESC`
+      obj = await sequelize.query(query, { type: QueryTypes.SELECT })
     // console.log('berhasil', obj);
+    }
 
     const dataWithIcons = obj.map(obj => {
         const techno = obj.technologies.map(element => {
@@ -142,7 +149,7 @@ async function addProject(req, res) {
             technologies.push('Typescript')
         }
     const distanceTime =  distanceTimeCount(StartDate, endDate)
-    const image = "program.jpeg"
+    const image = req.file.filename
     const author = req.session.idUser 
     const query = `INSERT INTO projects (title, description, "technologies", "StartDate", "endDate", "distanceTime", image, author, "createdAt", "updatedAt") 
                    VALUES ($1, $2, $3, $4, $5, $6, $7, $8, NOW(), NOW())`
@@ -158,6 +165,7 @@ async function detailProject(req, res) {
     const { id } = req.params
     const query = `SELECT projects.id, title, description, "StartDate", "endDate", "distanceTime", technologies, image, users.name AS author FROM projects LEFT JOIN users ON projects.author = users.id WHERE projects.id=${id}`
     const obj = await sequelize.query(query, { type: QueryTypes.SELECT })
+    console.log("photo adakah", obj);
 
     const update = obj.map(item => ({
         ...item,
@@ -224,9 +232,18 @@ async function updateProject(req, res) {
             technologies.push('Typescript')
         }
     const distanceTime =  distanceTimeCount(StartDate, endDate)
-    const image = "program.jpeg"
-    const query = `UPDATE projects SET title=$1, description=$2, "technologies"=$3, "StartDate"=$4, "endDate"=$5, "distanceTime"=$6, image=$7, "createdAt"=NOW(), "updatedAt"=NOW() WHERE id=${id}`
-    const values = [title, description, technologies, StartDate, endDate, distanceTime, image]
+    let image = ""
+    if (req.file) {
+        image =req.file.filename
+    }
+    if (!image) {
+        const query = `SELECT projects.id, title, description, "StartDate", "endDate", "distanceTime", technologies, image, users.name AS author FROM projects LEFT JOIN users ON projects.author = users.id WHERE projects.id=${id}`
+        const obj = await sequelize.query(query, { type: QueryTypes.SELECT })
+        image = obj[0].image
+    }
+    const author = req.session.idUser
+    const query = `UPDATE projects SET title=$1, description=$2, "technologies"=$3, "StartDate"=$4, "endDate"=$5, "distanceTime"=$6, image=$7, author=$8, "createdAt"=NOW(), "updatedAt"=NOW() WHERE id=${id}`
+    const values = [title, description, technologies, StartDate, endDate, distanceTime, image, author]
     const obj = await sequelize.query(query, { bind: values })
 
 

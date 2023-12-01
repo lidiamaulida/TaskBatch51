@@ -4,7 +4,7 @@
   "description": "my personal web project",
   "main": "index.js",
   "scripts": {
-    "start": "nodemon day15/index.js"
+    "start": "nodemon day16/index.js"
   },
   "author": "Lidia",
   "license": "ISC",
